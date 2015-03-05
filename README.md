@@ -79,13 +79,17 @@ LOCAL_MODULE := MyLib
 
 include $(BUILD_SHARED_LIBRARY)
 </pre>
-- Application.mk
+- Application.mk. Note: List of available toolchain is in android-ndk-r10d/build/core/setup-toolchain.mk. You can change 4.9 to another if it doesn't work.
 
 <pre>
-APP_STL := gnustl_static
-APP_CPPFLAGS := -frtti -fexceptions
+APP_STL := gnustl_shared
+
+APP_CPPFLAGS += -frtti
+APP_CPPFLAGS += -fexceptions
+APP_CPPFLAGS += -std=c++11
+
 APP_ABI := armeabi-v7a
-APP_PLATFORM := android-16
+NDK_TOOLCHAIN_VERSION := 4.9
 </pre>
 
 Setup Jsoncpp
@@ -158,6 +162,14 @@ JNIEXPORT jstring JNICALL Java_com_example_ndk_1json_1androidstudio_NativeClass_
 }
 </pre>
 
+Troubleshooting
+-------------------
+- Crash on "Json:Reader jsonReader". Make sure Application.mk has :
+
+<pre>
+APP_STL := gnustl_shared
+NDK_TOOLCHAIN_VERSION := 4.9
+</pre>
 Reference
 =======================
 - http://www.phonesdevelopers.com/1798779/
