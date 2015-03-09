@@ -92,6 +92,14 @@ APP_ABI := armeabi-v7a
 NDK_TOOLCHAIN_VERSION := 4.9
 </pre>
 
+- MainActivity.class
+
+<pre>
+static {
+    System.loadLibrary("MyLib");
+}
+</pre>
+
 Setup Jsoncpp
 ----------------------------------------
 
